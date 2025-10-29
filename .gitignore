@@ -1,0 +1,7 @@
+logs
+*.pyc
+tstr_data
+*_logs
+*.png
+*.zip
+
