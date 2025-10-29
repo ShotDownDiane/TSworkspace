@@ -1,0 +1,51 @@
+model: unconditional
+setting: univariate
+ckpt: /share/mas/zhangzhixiang/awd/generator/TSFlow/uncond_logs/tsflow_uncond/tsflow_uncond/251021-024721/checkpoints/electricity_nips-epoch=193-train_loss=0.159.ckpt
+device: cuda:0
+model_params:
+  backbone_params:
+    input_dim: 1
+    output_dim: 1
+    step_emb: 64
+    num_residual_blocks: 3
+    residual_block: s4
+    hidden_dim: 64
+    dropout: 0.0
+    init_skip: False
+    feature_skip: True
+
+  freq: H
+  normalization: longmean
+  context_length: 336 # 360 for `D`
+  prediction_length: 24 # 30 for `D`
+  target_dim: 1
+ 
+  use_ema: True
+  use_lags: False
+  
+  num_steps: 0
+  solver: euler
+  matching: ot
+
+  device: cuda:0
+
+  optimizer_params: 
+    lr: 1.e-3
+
+  prior_params:
+    kernel: iso
+    gamma: 1.
+    context_freqs: 14
+
+  ema_params: 
+    beta: 0.9999
+    update_after_step: 128
+    update_every: 1
+
+dataset_params:
+  dataset: electricity_nips
+  num_batches_per_epoch: 128
+  batch_size: 64
+
+
+seed: 6432
